@@ -1,33 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Treino Pessoal</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div class="container" id="categoryA">
-    <h1>Categoria A - Treino Superiores</h1>
-    <div id="exercise-listA">
-        <!-- Lista de exercícios será preenchida dinamicamente com JavaScript -->
-    </div>
-
-<div class="container" id="categoryB">
-    <h1>Categoria B - Treino Dorsal</h1>
-    <div id="exercise-listB">
-        <!-- Lista de exercícios será preenchida dinamicamente com JavaScript -->
-    </div>
+<div id="workouts-container" class="container">
+    <!-- Aqui os exercícios serão adicionados com JavaScript -->
 </div>
 
-<div class="container" id="categoryC">
-    <h1>Categoria C - Treino Perna</h1>
-    <div id="exercise-listC">
-        <!-- Lista de exercícios será preenchida dinamicamente com JavaScript -->
-    </div>
-</div>
+<script>
+    const workouts = {
+        A: [
+            {name: 'Voador Frontal', series: 3, reps: 15, image: 'voador-frontal.jpg'},
+            {name: 'Supino Inclinado com Barra', series: 5, reps: '8-12', image: 'supino-inclinado.jpg'},
+            {name: 'Crucifixo no Cross Polia Alta + Média (Bi set)', series: 3, reps: '8-12', image:'crucifico-no-cross-polia-alta.jpg'},
+            {name: 'Tríceps com Barra Reta na Polia', series: 4, reps: '8-12', image: 'triceps-com-barra-reta-na-polia.jpg'},
+            {name: 'Tríceps Francês com Corda na Polia', series: 4, reps: '8-12', image: 'triceps-frances-com-corda-na-polia.jpg'},
+            {name: 'Desenvolvimento Máquina ou com Halteres', series: 3, reps: '8-12', image: 'desenvolvimento-maquina.jpg'},
+            {name: 'Elevação Lateral com Halteres + Elevação Frontal (Bi set)', series: 3, reps: '8-12', image: 'elevacao-lateral-com-halteres.jpg'},
+            {name: 'Abdominal Reto + Prancha', series: 3, reps: 'max', image: 'abdominal-reto.jpg'}
+        ],
+        B: [
+            {name: 'Remada curvada com barra pegada pronada', series: 5, reps: '8-12', image: 'remada-curvada-com-barra.jpg'},
+            {name: 'Remada unilateral com halteres', series: 3, reps: '8-12', rest: 60, image: 'remada-unilateral-com-halteres.jpg'},
+            {name: 'Remada com pegada neutra ( com drop set )', series: 4, reps: '8-12', image: 'remada-com-pegada-neutra.jpg'},
+            {name: 'Puxada aberta pronada', series: 4, reps: '8-12', rest: 60, image: 'puxada-aberta-pronada.jpg'},
+            {name: 'Facepull na polia', series: 3, reps: '15', rest: 60, image: 'facepull-na-polia.jpg'},
+            {name: 'Rosca direta barra W + Rosca martelo', series: 3, reps: '8-12', image: 'rosca-direta-barra-w.jpg'},
+            {name: 'Extensão de tronco no banco romano', series: 3, reps: 'max', image: 'extensao-de-tronco-no-banco-romano.jpg'},
+        ],
+        C: [
+            {name: 'Cadeira extensora', series: 3, reps: '15', rest: 60, image: 'cadeira-extensora.jpg'},
+            {name: 'Bi-set agachamento no smith + agachamento sumo com step', series: 3, reps: '8-12', image: 'bi-set-agachamento-no-smith.jpg'},
+            {name: 'Leg press 45° ( cluster set na ultima serie (4-4-4)', series: 4, reps: '8-12',image: 'leg-press-45.jpg'},
+            {name: 'Cadeira flexora', series: 3, reps: '8-12', image: 'cadeira-flexora.jpg'},
+            {name: 'Passada (Avanço) com barra', series: 3, reps: '8-12', image: 'passada-com-barra.jpg'},
+            {name: 'Cadeira abdutora', series: 3, reps: '15', image: 'cadeira-abdutora.jpg'},
+            {name: 'Flexão plantar com carga (Gemeos)', series: 3, reps: 'max', image: 'flexao-plantar-com-carga.jpg'},
+        ]
+    };
 
-<script src="script.js"></script>
+    const workoutsContainer = document.getElementById('workouts-container');
+
+    // Iterar sobre o objeto workouts
+    for (let category in workouts) {
+        // Criar um título para a categoria
+        const categoryTitle = document.createElement('h2');
+        categoryTitle.textContent = `Categoria ${category}`;
+        workoutsContainer.appendChild(categoryTitle);
+
+        // Iterar sobre os exercícios da categoria
+        workouts[category].forEach(exercise => {
+            // Criar um elemento para o exercício
+            const exerciseElement = document.createElement('div');
+            exerciseElement.classList.add('exercise');
+
+            // Adicionar informações do exercício ao elemento
+            exerciseElement.innerHTML = `
+                    <h3>${exercise.name}</h3>
+                    <img src="${exercise.image}" alt="${exercise.name}">
+                    <p><strong>Séries:</strong> ${exercise.series}</p>
+                    <p><strong>Repetições:</strong> ${exercise.reps}</p>
+                    ${exercise.rest ? `<p><strong>Descanso:</strong> ${exercise.rest} segundos</p>` : ''}
+                `;
+            // Adicionar o elemento ao contêiner de exercícios
+            workoutsContainer.appendChild(exerciseElement);
+        });
+    }
+</script>
 </body>
 </html>
