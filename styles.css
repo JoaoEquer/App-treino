@@ -14,12 +14,3 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-button {
-    background-color: #070707;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    margin-right: 10px;
-}
